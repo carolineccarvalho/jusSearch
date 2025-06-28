@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import searchIcon from '.cache/default-development/autocomplete-app/src/icons8-search-50.png';
-import jusIcon from '.cache/default-development/autocomplete-app/src/iconJus.png';
+import searchIcon from './icons8-search-50.png';
+import jusIcon from './iconJus.png';
 
 function App() {
   const [query, setQuery] = useState('');
