@@ -3,6 +3,7 @@ from ariadne import QueryType, make_executable_schema, graphql_sync
 from flask_cors import CORS
 import json
 import requests
+import urllib.parse
 
 app = Flask(__name__)
 CORS(app)
@@ -29,8 +30,9 @@ def resolve_autocomplete(_, info, query):
 
     for suffix in listSuffix:
         q = query + suffix
+        q_encoded = urllib.parse.quote(q)
         try:
-            response = requests.get(f'http://google.com/complete/search?client=chrome&q={q}', timeout=1)
+            response = requests.get(f'http://google.com/complete/search?client=chrome&q={q_encoded}', timeout=1)
             suggestions = json.loads(response.text)[1]
             for completion in suggestions:
                 if completion not in ans:

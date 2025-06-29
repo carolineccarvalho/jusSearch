@@ -73,18 +73,29 @@ function App() {
     if (e.key === 'ArrowDown') {
       setHighlightedIndex((prev) => {
         const next = Math.min(prev + 1, suggestions.length - 1);
-        if (next >= visibleStart + 10) setVisibleStart(visibleStart + 1);
+        setVisibleStart((currentStart) => {
+          if (next >= currentStart + 6) {
+            return next - 5;  
+          }
+          return currentStart;
+        });
         return next;
       });
     }
-
+    
     if (e.key === 'ArrowUp') {
       setHighlightedIndex((prev) => {
         const next = Math.max(prev - 1, 0);
-        if (next < visibleStart) setVisibleStart(Math.max(visibleStart - 1, 0));
+        setVisibleStart((currentStart) => {
+          if (next < currentStart) {
+            return next;  
+          }
+          return currentStart;
+        });
         return next;
       });
     }
+    
   };
 
   const visibleSuggestions = suggestions.slice(visibleStart, visibleStart + 10);
